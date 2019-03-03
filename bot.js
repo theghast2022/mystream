@@ -54,3 +54,5 @@ if (message.content.startsWith(prefix + 'ply')) {
 
 
 });
+
+client.login(process.env.BOT_TOKEN)
