@@ -6,25 +6,51 @@ const ms = require('ms'); // npm i ms
 const cool = [];
 const fs = require ('fs');
 
-client.on('ready', () => {
-   console.log(`----------------`);
-      console.log(`Desert Bot- Code By : ZorexHost`);
-        console.log(`----------------`);
-      console.log(`ON ${client.guilds.size} Servers '     Code By : ZorexHost `);
-    console.log(`----------------`);
-  console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`$help | $inv `)
-client.user.setStatus("dnd")
-});
+const prefix = '$'
 
 client.on('message', message => {
-   let emoji = client.guilds.get("511225819415183360").emojis.find(r => r.name === "joy"); //كود تعريف المتغير emoji
+  if (!message.content.startsWith(prefix)) return;
+  var args = message.content.split(' ').slice(1);
+  var argresult = args.join(' ');
+  if (message.author.id !== "388357326614167563") return;
+
+  
+  if (message.content.startsWith(prefix + 'wt')) {
+  client.user.setActivity(argresult, {type: 'WATCHING'})
+     console.log('test' + argresult);
+    message.channel.sendMessage(`Watch Now: **${argresult}**`)
+} 
+
  
-    if(message.content === 'sendemoji'){ //تحقق اذا الرساله هي sebdemji
-   message.channel.send(`[ ${emoji} ]`)//يرسل المتغير emoji 
-    }  // xomar933 نهاية قوس التحقق
+  if (message.content.startsWith(prefix + 'ls')) {
+  client.user.setActivity(argresult, {type: 'LISTENING'})
+     console.log('test' + argresult);
+    message.channel.sendMessage(`LISTENING Now: **${argresult}**`)
+} 
+
+
+if (message.content.startsWith(prefix + 'setname')) {
+  client.user.setUsername(argresult).then
+      message.channel.sendMessage(`Username Changed To **${argresult}**`)
+  return message.reply("You Can change the username 2 times per hour");
+} 
+
+if (message.content.startsWith(prefix + 'setavatar')) {
+  client.user.setAvatar(argresult);
+   message.channel.sendMessage(`Avatar Changed Successfully To **${argresult}**`);
+}
+
+if (message.content.startsWith(prefix + 'st')) {
+  client.user.setGame(argresult, "https://www.twitch.tv/peery13");
+     console.log('test' + argresult);
+    message.channel.sendMessage(`Streaming: **${argresult}**`)
+} 
+if (message.content.startsWith(prefix + 'ply')) {
+  client.user.setGame(argresult);
+     console.log('test' + argresult);
+    message.channel.sendMessage(`Playing: **${argresult}**`)
+} 
+
+
+
 });
- 
-
-
-client.login('NTA2ODg4OTkzMDM2ODI4Njcz.D1yXrw.i7O_GUAfrkV8P3_IZrBpx95Dgdg')
