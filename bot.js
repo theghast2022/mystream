@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const moment = require("moment");
 const client = new Discord.Client();
-const prefix = "/"
 const ms = require('ms'); // npm i ms
 const cool = [];
 const fs = require ('fs');
