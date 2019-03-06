@@ -1,57 +1,32 @@
 const Discord = require('discord.js');
-const moment = require("moment");
 const client = new Discord.Client();
-const ms = require('ms'); // npm i ms
-const cool = [];
-const fs = require ('fs');
-
-const prefix = '$'
-
-client.on('message', message => {
-  if (!message.content.startsWith(prefix)) return;
-  var args = message.content.split(' ').slice(1);
-  var argresult = args.join(' ');
-  if (message.author.id !== "388357326614167563") return;
-
-  
-  if (message.content.startsWith(prefix + 'wt')) {
-  client.user.setActivity(argresult, {type: 'WATCHING'})
-     console.log('test' + argresult);
-    message.channel.sendMessage(`Watch Now: **${argresult}**`)
-} 
-
- 
-  if (message.content.startsWith(prefix + 'ls')) {
-  client.user.setActivity(argresult, {type: 'LISTENING'})
-     console.log('test' + argresult);
-    message.channel.sendMessage(`LISTENING Now: **${argresult}**`)
-} 
-
-
-if (message.content.startsWith(prefix + 'setname')) {
-  client.user.setUsername(argresult).then
-      message.channel.sendMessage(`Username Changed To **${argresult}**`)
-  return message.reply("You Can change the username 2 times per hour");
-} 
-
-if (message.content.startsWith(prefix + 'setavatar')) {
-  client.user.setAvatar(argresult);
-   message.channel.sendMessage(`Avatar Changed Successfully To **${argresult}**`);
-}
-
-if (message.content.startsWith(prefix + 'st')) {
-  client.user.setGame(argresult, "https://www.twitch.tv/peery13");
-     console.log('test' + argresult);
-    message.channel.sendMessage(`Streaming: **${argresult}**`)
-} 
-if (message.content.startsWith(prefix + 'ply')) {
-  client.user.setGame(argresult);
-     console.log('test' + argresult);
-    message.channel.sendMessage(`Playing: **${argresult}**`)
-} 
-
-
-
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.login(process.env.BOT_TOKEN)
+
+const developers = ["388357326614167563"]
+const adminprefix = "!";
+client.on('message', message => {
+    var argresult = message.content.split(` `).slice(1).join(' ');
+      if (!developers.includes(message.author.id)) return;
+      
+  if (message.content.startsWith(adminprefix + 'sp')) {
+    client.user.setGame(argresult);
+      message.channel.send(`**Status You   ${argresult}**`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'sw')) {
+  client.user.setActivity(argresult, {type:'WATCHING'});
+      message.channel.send(`**Status You   ${argresult}**`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'sl')) {
+  client.user.setActivity(argresult , {type:'LISTENING'});
+      message.channel.send(`**Status You  ${argresult}**`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'ss')) {
+    client.user.setGame(argresult, "https://www.twitch.tv/M3roof");
+      message.channel.send(`**Status You ${argresult} **`)
+}
+});
+
+client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
